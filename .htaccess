@@ -1,0 +1,13 @@
+# Enable the Phusion Passenger engine
+PassengerEnabled On
+
+# Tell Passenger where your Python interpreter is.
+# This path might be different on your server.
+# Common paths are /usr/bin/python3.11 or /usr/local/bin/python3.11
+PassengerPython /home/yuvavart/python_versions/3.11/bin/python
+
+# Tell Passenger the root of your application
+PassengerAppRoot /home/yuvavart/public_html/EmotionDetectionWebsite
+
+# Specify the startup file we just created
+PassengerAppEntryPoint passenger_wsgi.py 

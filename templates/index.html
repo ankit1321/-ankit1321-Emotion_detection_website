@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emotion Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Emotion Detection from Text</h1>
+        <form action="/predict" method="post">
+            <textarea name="text" rows="10" cols="50" placeholder="Enter text here..." required>{{ text if text }}</textarea>
+            
+            <h2>Select Models for Prediction</h2>
+            <div class="model-selection">
+                {% for model in models %}
+                <label>
+                    <input type="checkbox" name="models" value="{{ model }}" {% if model in selected_models %}checked{% endif %}>
+                    {{ model }}
+                </label>
+                {% endfor %}
+            </div>
+
+            <button type="submit">Predict</button>
+        </form>
+
+        {% if predictions %}
+        <div class="results">
+            <h2>Predictions</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Model</th>
+                        <th>Predicted Emotion</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for model, prediction in predictions.items() %}
+                    <tr>
+                        <td>{{ model }}</td>
+                        <td>{{ prediction }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html> 
